@@ -1,20 +1,29 @@
-import HomePage from "./Homepage";
-import Pallet from "./Pallet";
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import HomePage, {
+  loader as HomePageLoader,
+  action as HomePageAction,
+} from "./Homepage";
+import InputForm from "./InputForm";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 import "./App.css";
 
 function App() {
-
-  const browserRouter = createBrowserRouter(createRoutesFromElements(
-    <Route path="/" element={<HomePage />}>
-      <Route index element={<Pallet />} />
-    </Route>
-  ))
-
-
-  return( 
-    <RouterProvider router={browserRouter} />   
+  const browserRouter = createBrowserRouter(
+    createRoutesFromElements(
+      <Route
+        path="/"
+        element={<HomePage />}
+        loader={HomePageLoader}
+        action={HomePageAction}
+      />
+    )
   );
+
+  return <RouterProvider router={browserRouter} />;
 }
 
 export default App;
