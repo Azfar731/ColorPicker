@@ -1,10 +1,18 @@
 import { Form } from "react-router-dom";
 import "./InputForm.css";
 
+
+export async function action({request}) {
+  console.log("In action function");
+  const formData = await request.formData()
+  console.log(formData)
+  return null;
+}
+
 export default function InputForm() {
   return (
     <div className="form-container">
-      <Form>
+      <Form method="post">
         <input type="color" name="color" id="color" value="#42bff5"/>
         <select name="mode" id="mode" value="monochrome">
             <option value="monochrome" >Monochrome</option>

@@ -1,6 +1,6 @@
 import InputForm from "./InputForm";
 import Pallet from "./Pallet";
-
+import { Outlet } from "react-router-dom";
 import "./HomePage.css";
 
 export async function loader({ request }) {
@@ -21,16 +21,11 @@ export async function loader({ request }) {
   return data.colors;
 }
 
-export async function action() {
-  console.log("In action function");
-  // console.log(formdata);
-  return null;
-}
 
 export default function HomePage() {
   return (
     <main>
-      <InputForm />
+      <Outlet />
       <Pallet />
     </main>
   );

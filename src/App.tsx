@@ -1,8 +1,5 @@
-import HomePage, {
-  loader as HomePageLoader,
-  action as HomePageAction,
-} from "./Homepage";
-import InputForm from "./InputForm";
+import HomePage, { loader as HomePageLoader } from "./Homepage";
+import InputForm, { action as InputFormAction } from "./InputForm";
 import {
   Route,
   RouterProvider,
@@ -14,12 +11,9 @@ import "./App.css";
 function App() {
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(
-      <Route
-        path="/"
-        element={<HomePage />}
-        loader={HomePageLoader}
-        action={HomePageAction}
-      />
+      <Route path="/" element={<HomePage />} loader={HomePageLoader}>
+        <Route index element={<InputForm />} action={InputFormAction} />
+      </Route>
     )
   );
 
