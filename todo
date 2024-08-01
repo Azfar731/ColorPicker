@@ -9,3 +9,6 @@ App
 Next task:
 Make action and loader for InputForm
 action sends information to "/" path with additioanl Search Params
+
+
+complete action function functionality. 

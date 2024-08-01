@@ -1,5 +1,6 @@
 import HomePage, { loader as HomePageLoader } from "./Homepage";
 import InputForm, { action as InputFormAction } from "./InputForm";
+import Pallet from "./Pallet";
 import {
   Route,
   RouterProvider,
