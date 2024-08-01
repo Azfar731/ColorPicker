@@ -1,6 +1,6 @@
 import HomePage, { loader as HomePageLoader } from "./Homepage";
 import InputForm, { action as InputFormAction } from "./InputForm";
-import Pallet from "./Pallet";
+import Navbar from "./Navbar";
 import {
   Route,
   RouterProvider,
@@ -18,7 +18,12 @@ function App() {
     )
   );
 
-  return <RouterProvider router={browserRouter} />;
+  return (
+    <>
+      <Navbar />
+      <RouterProvider router={browserRouter} />
+    </>
+  );
 }
 
 export default App;

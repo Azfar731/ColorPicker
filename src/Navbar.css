@@ -1,0 +1,14 @@
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    height: 10vh;
+}
+
+nav > h1{
+    font-size: 3rem;
+    background: linear-gradient(90deg, #9d00ff, #efff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
