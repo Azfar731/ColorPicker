@@ -42,6 +42,18 @@ input[type=number]{
    text-align: center;
 }
 
+/* To remove the increment and decrement buttons */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* For firefox browser */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
 .border{
     background-color: white;
     border: 1px solid  #D1D5DB;
