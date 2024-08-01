@@ -1,27 +1,29 @@
 import "./ColorDisplayer.css";
 
 type Params = {
-  hex: string;
+  colorInfo: { hex: string; name: string };
   width: number;
 };
 
-export default function ColorDisplayer({ hex, width }: Params) {
+export default function ColorDisplayer({ colorInfo, width }: Params) {
   const styles = {
-    width: `100%`,
-    height: "90%",
-    backgroundColor: hex,
+    width: `${width}%`,
+    height: "100%",
+    minWidth: "10%",
+    backgroundColor: colorInfo.hex,
+    position: "relative",
   };
 
-
   const fontSize = {
-    fontSize:  width * 0.2 > 2 ? `1.5rem` : `0.8rem`
-  }
-
+    fontSize: width * 0.2 > 2 ? `2rem` : `1.5rem`,
+  };
 
   return (
-    <div style={{ width: `${width}%` }}>
-      <div style={styles}></div>
-      <div className="codeContainer" style={fontSize}>{hex}</div>
-    </div>
+      <div style={styles}>
+        <div className="color-info" style={fontSize}>
+          <div className="color-code">{colorInfo.hex}</div>
+          <div className="color-name">{colorInfo.name}</div>
+        </div>
+      </div>
   );
 }

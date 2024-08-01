@@ -27,13 +27,13 @@ export async function loader({ request }) {
 export default function HomePage() {
   const colorArray = useLoaderData();
 
-  const colorHexValues: string[] = colorArray.map((color) => color.hex.value);
+  const colorInfo = colorArray.map((color) => ({hex: color.hex.value, name: color.name.value}));
   // console.log(colorHexValues)
 
   return (
     <main>
       <Outlet />
-      <Pallet colorHexValues={colorHexValues} />
+      <Pallet colorsInfo={colorInfo} />
     </main>
   );
 }

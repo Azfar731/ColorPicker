@@ -1,8 +1,22 @@
-.codeContainer {
-  height: 10%;
-  font-size: 2rem;
+.color-info {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  gap: 0.8em;
+  background-color:transparent;
+  width: 100%;
+  position: absolute;
+  bottom: 100px;
+}
+
+.color-code{
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.color-name{
+  font-weight: thin;
+  font-size: 0.5em;
+  color: darkslategrey; 
 }

@@ -2,20 +2,15 @@ import "./Pallet.css";
 import ColorDisplayer from "./ColorDisplayer";
 
 type Params = {
-  colorHexValues: string[];
+  colorsInfo: { hex: string; name: string }[];
 };
 
-export default function Pallet({ colorHexValues }: Params) {
-  const availableWidth: number = 100 / colorHexValues.length;
-  
+export default function Pallet({ colorsInfo }: Params) {
+  const availableWidth: number = 100 / colorsInfo.length;
 
-  const colorContainers = colorHexValues.map((hexValue) => {
-    return <ColorDisplayer hex={hexValue} width={availableWidth} />
+  const colorContainers = colorsInfo.map(colorInfo => {
+    return <ColorDisplayer colorInfo={colorInfo} width={availableWidth} />;
   });
 
-  return (
-    <div className="pallet">
-        {colorContainers}
-    </div>
-  );
+  return <div className="pallet">{colorContainers}</div>;
 }

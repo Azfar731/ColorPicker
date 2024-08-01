@@ -31,7 +31,7 @@ export default function InputForm() {
           type="number"
           name="count"
           id="count"
-          max={20}
+          max={50}
           min={1}
           defaultValue="5"
           required
