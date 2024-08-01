@@ -2,5 +2,54 @@
 
 .form-container{
     height:20%;
-    background-color: aqua;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    height: 30%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+select {
+    font-size: 1rem;
+}
+
+
+.inputContainer{
+    display: flex;
+    /* flex-direction: column; */
+    gap:5px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type=color]{
+    height: 100%;
+    width: 20%;
+}
+
+input[type=number]{
+   width: 10;
+   font-size: 1rem; 
+   text-align: center;
+}
+
+.border{
+    background-color: white;
+    border: 1px solid  #D1D5DB;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.btn{
+    width: 180px;
+    font-size: 1rem;
 }
