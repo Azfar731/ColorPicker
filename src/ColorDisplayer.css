@@ -1,0 +1,8 @@
+.codeContainer {
+  height: 10%;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
