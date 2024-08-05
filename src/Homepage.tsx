@@ -13,6 +13,7 @@ export async function loader({ request }) {
   const searchQuery = `?hex=${color}&mode=${mode}&count=${count}&format=json`;
 
   console.log("URL: " + baseUrl + searchQuery);
+  
   const response = await fetch(baseUrl + searchQuery);
   if (response.status !== 200) {
     throw new Error("Error occurred with API");
