@@ -4,7 +4,7 @@ import { Outlet, useLoaderData } from "react-router-dom";
 import "./HomePage.css";
 
 export async function loader({ request }) {
-  console.log("this change is in my dev branch")
+
   const params = new URL(request.url).searchParams;
   const color = params.get("color") || "42bff5";
   const mode = params.get("mode") || "monochrome";
