@@ -1,7 +1,7 @@
 import Pallet from "./Pallet";
 import InputForm from "./InputForm";
-import { getSearchParams } from "../utilityFunctions";
-import { defer, Await, useLoaderData } from "react-router-dom";
+import { getSearchParams, getFormData } from "../utilityFunctions";
+import { defer, Await, useLoaderData, redirect } from "react-router-dom";
 import { Suspense } from "react";
 import "./HomePage.css";
 
@@ -35,6 +35,13 @@ export function loader({ request }) {
 
   return defer({ colorsInfo: fetchDataFromColorAPI(baseUrl + searchQuery) });
 }
+
+
+export async function action({ request }) {
+  const { color, mode, count } = getFormData(await request.formData());
+  throw redirect(`/?color=${color}&mode=${mode}&count=${count}`);
+}
+
 
 export default function HomePage() {
   const loaderData: {colorsInfo: Color[] } = useLoaderData();

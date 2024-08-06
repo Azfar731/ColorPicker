@@ -1,5 +1,4 @@
-import HomePage, { loader as HomePageLoader } from "./Homepage";
-import InputForm, { action as InputFormAction } from "./InputForm";
+import HomePage, { loader as HomePageLoader, action as HomePageAction } from "./Homepage";
 import Navbar from "./Navbar";
 import {
   Route,
@@ -12,7 +11,7 @@ import "./App.css";
 function App() {
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<HomePage />} loader={HomePageLoader} action={InputFormAction} />
+      <Route path="/" element={<HomePage />} loader={HomePageLoader} action={HomePageAction} />
     )
   );
 

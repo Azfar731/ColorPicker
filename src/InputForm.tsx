@@ -2,20 +2,10 @@ import { Form, redirect, useSearchParams } from "react-router-dom";
 import { getSearchParams } from "../utilityFunctions";
 import "./InputForm.css";
 
-export async function action({ request }) {
-  console.log("In action function");
-  const formData = await request.formData();
-  const color = formData.get("color").slice(1);
-  const mode = formData.get("mode");
-  const count = formData.get("count");
-  throw redirect(`/?color=${color}&mode=${mode}&count=${count}`);
-}
-
 export default function InputForm() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { color, mode, count } = getSearchParams(searchParams);
 
-  
   return (
     <div className="form-container">
       <Form method="post" className="form">
@@ -28,12 +18,7 @@ export default function InputForm() {
         />
         <div className="inputContainer">
           <label htmlFor="mode">Mode</label>
-          <select
-            name="mode"
-            id="mode"
-            defaultValue={mode}
-            className="border"
-          >
+          <select name="mode" id="mode" defaultValue={mode} className="border">
             <option value="monochrome">Monochrome</option>
             <option value="monochrome-dark">Monochrome Dark</option>
             <option value="monochrome-light">Monochrome Light</option>
