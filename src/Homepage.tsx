@@ -1,17 +1,31 @@
 import Pallet from "./Pallet";
 import InputForm from "./InputForm";
-import { getSearchParams, getFormData, fetchDataFromColorAPI } from "../utilityFunctions";
-import { defer, Await, useLoaderData, redirect } from "react-router-dom";
+import {
+  getSearchParams,
+  getFormData,
+  fetchDataFromColorAPI,
+} from "../utilityFunctions";
+import {
+  defer,
+  Await,
+  useLoaderData,
+  redirect,
+  LoaderFunctionArgs,
+  ActionFunctionArgs,
+} from "react-router-dom";
 import { Suspense } from "react";
 import "./HomePage.css";
 
 type Color = {
   hex: string;
   name: string;
-}
+};
 
+type LoaderData = {
+  colorsInfo: Promise<Color[]>;
+};
 
-export function loader({ request }) {
+export function loader({ request }: LoaderFunctionArgs) {
   const params = new URL(request.url).searchParams;
   const { color, mode, count } = getSearchParams(params);
 
@@ -21,16 +35,13 @@ export function loader({ request }) {
   return defer({ colorsInfo: fetchDataFromColorAPI(baseUrl + searchQuery) });
 }
 
-
-export async function action({ request }) {
+export async function action({ request }: ActionFunctionArgs) {
   const { color, mode, count } = getFormData(await request.formData());
   throw redirect(`/?color=${color}&mode=${mode}&count=${count}`);
 }
 
-
 export default function HomePage() {
-  const loaderData: {colorsInfo: Color[] } = useLoaderData();
-  
+  const { colorsInfo } = useLoaderData() as LoaderData;
 
   function renderPallet(colorsInfo: Color[]) {
     return <Pallet colorsInfo={colorsInfo} />;
@@ -40,7 +51,7 @@ export default function HomePage() {
     <main>
       <InputForm />
       <Suspense fallback={<h1>Loading....</h1>}>
-        <Await resolve={loaderData.colorsInfo}>{renderPallet}</Await>
+        <Await resolve={colorsInfo}>{renderPallet}</Await>
       </Suspense>
     </main>
   );
