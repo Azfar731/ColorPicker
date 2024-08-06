@@ -1,5 +1,6 @@
 import Pallet from "./Pallet";
-import { Outlet, defer, Await ,useLoaderData } from "react-router-dom";
+import InputForm from "./InputForm";
+import {  defer, Await ,useLoaderData } from "react-router-dom";
 import { Suspense } from "react";
 import "./HomePage.css";
 
@@ -47,7 +48,7 @@ export default function HomePage() {
 
   return (
     <main>
-      <Outlet />
+      <InputForm />
       <Suspense fallback={<h1>Loading....</h1>}>
         <Await resolve={loaderData.colorsArray}>
           {renderPallet}
