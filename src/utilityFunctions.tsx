@@ -1,7 +1,5 @@
-type Color = {
-    hex: string;
-    name: string;
-}
+import {Color, ColorInput} from "./customTypes"
+
 export function getSearchParams(searchParams: URLSearchParams){
     const color = searchParams.get("color") || "42bff5";
     const mode = searchParams.get("mode") || "monochrome";
@@ -41,9 +39,11 @@ export async function fetchDataFromColorAPI(targetUrl: string) {
     return getColorsInfo(data.colors);
 }
 
-function getColorsInfo(colorsArray) {
+function getColorsInfo<T extends ColorInput>(colorsArray: T[]) {
     const colorInfo: Color[] = colorsArray.map(
-      (color) => ({ hex: color.hex.value, name: color.name.value })
+      (color) => { 
+        return { hex: color.hex.value, name: color.name.value }
+      }
     );
     return colorInfo;
 }

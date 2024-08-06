@@ -5,6 +5,7 @@ import {
   getFormData,
   fetchDataFromColorAPI,
 } from "./utilityFunctions";
+import {Color, LoaderData} from "./customTypes"
 import {
   defer,
   Await,
@@ -13,17 +14,9 @@ import {
   LoaderFunctionArgs,
   ActionFunctionArgs,
 } from "react-router-dom";
+
 import { Suspense } from "react";
 import "./HomePage.css";
-
-type Color = {
-  hex: string;
-  name: string;
-};
-
-type LoaderData = {
-  colorsInfo: Promise<Color[]>;
-};
 
 export function loader({ request }: LoaderFunctionArgs) {
   const params = new URL(request.url).searchParams;
