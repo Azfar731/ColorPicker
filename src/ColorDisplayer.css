@@ -20,3 +20,16 @@
   font-size: 0.5em;
   color: darkslategrey; 
 }
+
+.value-copied-prompt{
+  background-color: grey;
+  border-radius: 25px;
+  padding: 0.5em 1em;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 10%;
+  left:50%;
+  transform: translateX(-50%);
+}

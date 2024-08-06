@@ -1,5 +1,7 @@
 import Pallet from "./Pallet";
-import { Outlet, defer, Await ,useLoaderData } from "react-router-dom";
+import InputForm from "./InputForm";
+import {getSearchParams} from "../utilityFunctions"
+import {  defer, Await ,useLoaderData } from "react-router-dom";
 import { Suspense } from "react";
 import "./HomePage.css";
 
@@ -17,9 +19,7 @@ async function fetchDataFromColorAPI(targetUrl: string){
 }
 export function loader({ request }) {
   const params = new URL(request.url).searchParams;
-  const color = params.get("color") || "42bff5";
-  const mode = params.get("mode") || "monochrome";
-  const count = params.get("count") || "5";
+  const {color,mode,count} = getSearchParams(params)
   
   const baseUrl = "https://www.thecolorapi.com/scheme";
   const searchQuery = `?hex=${color}&mode=${mode}&count=${count}&format=json`;
@@ -47,7 +47,7 @@ export default function HomePage() {
 
   return (
     <main>
-      <Outlet />
+      <InputForm />
       <Suspense fallback={<h1>Loading....</h1>}>
         <Await resolve={loaderData.colorsArray}>
           {renderPallet}

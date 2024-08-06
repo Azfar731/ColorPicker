@@ -12,9 +12,7 @@ import "./App.css";
 function App() {
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<HomePage />} loader={HomePageLoader}>
-        <Route index element={<InputForm />} action={InputFormAction} />
-      </Route>
+      <Route path="/" element={<HomePage />} loader={HomePageLoader} action={InputFormAction} />
     )
   );
 
