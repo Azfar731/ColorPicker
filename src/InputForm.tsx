@@ -3,7 +3,7 @@ import { getSearchParams } from "../utilityFunctions";
 import "./InputForm.css";
 
 export default function InputForm() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { color, mode, count } = getSearchParams(searchParams);
 
   return (

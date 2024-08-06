@@ -10,12 +10,24 @@ export function getSearchParams(searchParams: URLSearchParams){
     return {color,mode,count}
 }
 
-export function getFormData(formData){
-    const color = formData.get("color").slice(1);
-    const mode = formData.get("mode");
-    const count = formData.get("count");
+export function getFormData(formData: FormData){
+  // Retrieve form values
+  const colorEntry = formData.get("color");
+  const modeEntry = formData.get("mode");
+  const countEntry = formData.get("count");
 
-    return{color, mode, count}
+  // Check if any of the form values are null
+  if (colorEntry === null || modeEntry === null || countEntry === null) {
+    throw new Error("One or more required form fields are missing.");
+  }
+
+  // Safely process the values now that we know they're not null
+  const color = colorEntry.slice(1); 
+  const mode = modeEntry; 
+  const count = countEntry; 
+
+  return { color, mode, count };
+
 }
 
 
@@ -25,6 +37,7 @@ export async function fetchDataFromColorAPI(targetUrl: string) {
       throw new Error("Error occurred with API");
     }
     const data = await response.json();
+    console.log(data.colors)
     return getColorsInfo(data.colors);
 }
 
