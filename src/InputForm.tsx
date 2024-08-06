@@ -1,4 +1,4 @@
-import { Form, redirect, useSearchParams } from "react-router-dom";
+import { Form, useSearchParams } from "react-router-dom";
 import { getSearchParams } from "../utilityFunctions";
 import "./InputForm.css";
 

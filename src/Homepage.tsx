@@ -1,6 +1,6 @@
 import Pallet from "./Pallet";
 import InputForm from "./InputForm";
-import { getSearchParams, getFormData } from "../utilityFunctions";
+import { getSearchParams, getFormData, fetchDataFromColorAPI } from "../utilityFunctions";
 import { defer, Await, useLoaderData, redirect } from "react-router-dom";
 import { Suspense } from "react";
 import "./HomePage.css";
@@ -10,21 +10,6 @@ type Color = {
   name: string;
 }
 
-function getColorsInfo(colorsArray) {
-  const colorInfo: Color[] = colorsArray.map(
-    (color) => ({ hex: color.hex.value, name: color.name.value })
-  );
-  return colorInfo;
-}
-
-async function fetchDataFromColorAPI(targetUrl: string) {
-  const response = await fetch(targetUrl);
-  if (response.status !== 200) {
-    throw new Error("Error occurred with API");
-  }
-  const data = await response.json();
-  return getColorsInfo(data.colors);
-}
 
 export function loader({ request }) {
   const params = new URL(request.url).searchParams;
