@@ -9,7 +9,7 @@ export default function Pallet({ colorsInfo }: Params) {
   const availableWidth: number = 100 / colorsInfo.length;
 
   const colorContainers = colorsInfo.map(colorInfo => {
-    return <ColorDisplayer colorInfo={colorInfo} width={availableWidth} />;
+    return <ColorDisplayer key={colorInfo.hex} colorInfo={colorInfo} width={availableWidth} />;
   });
 
   return <div className="pallet">{colorContainers}</div>;
