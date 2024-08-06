@@ -4,8 +4,8 @@ import {
   getSearchParams,
   getFormData,
   fetchDataFromColorAPI,
-} from "./utilityFunctions";
-import {Color, LoaderData} from "./customTypes"
+} from "../utils/utilityFunctions";
+import { Color, LoaderData } from "../utils/customTypes";
 import {
   defer,
   Await,

@@ -1,5 +1,8 @@
-import HomePage, { loader as HomePageLoader, action as HomePageAction } from "./Homepage";
-import Navbar from "./Navbar";
+import HomePage, {
+  loader as HomePageLoader,
+  action as HomePageAction,
+} from "./Components/Homepage";
+import Navbar from "./Components/Navbar";
 import {
   Route,
   RouterProvider,
@@ -11,7 +14,12 @@ import "./App.css";
 function App() {
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<HomePage />} loader={HomePageLoader} action={HomePageAction} />
+      <Route
+        path="/"
+        element={<HomePage />}
+        loader={HomePageLoader}
+        action={HomePageAction}
+      />
     )
   );
 
