@@ -7,7 +7,6 @@ export async function action({ request }) {
   const color = formData.get("color").slice(1);
   const mode = formData.get("mode");
   const count = formData.get("count");
-
   throw redirect(`/?color=${color}&mode=${mode}&count=${count}`);
 }
 
