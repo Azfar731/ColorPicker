@@ -1,5 +1,5 @@
 import { Form, useSearchParams } from "react-router-dom";
-import { getSearchParams } from "../utilityFunctions";
+import { getSearchParams } from "./utilityFunctions";
 import "./InputForm.css";
 
 export default function InputForm() {

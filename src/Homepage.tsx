@@ -4,7 +4,7 @@ import {
   getSearchParams,
   getFormData,
   fetchDataFromColorAPI,
-} from "../utilityFunctions";
+} from "./utilityFunctions";
 import {
   defer,
   Await,
