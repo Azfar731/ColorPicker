@@ -18,7 +18,6 @@ function App() {
         path="/"
         element={<HomePage />}
         loader={HomePageLoader}
-        action={HomePageAction}
       />
     )
   );

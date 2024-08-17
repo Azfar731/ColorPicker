@@ -1,10 +1,10 @@
 import { Color, ColorInput } from "./customTypes";
 
 export function getSearchParams(searchParams: URLSearchParams) {
-  const color = searchParams.get("color") || "42bff5";
+  const unFormattedColorInput = searchParams.get("color") || "#42bff5";
   const mode = searchParams.get("mode") || "monochrome";
   const count = searchParams.get("count") || "5";
-
+  const color = unFormattedColorInput.slice(1)
   return { color, mode, count };
 }
 
@@ -33,7 +33,7 @@ export async function fetchDataFromColorAPI(targetUrl: string) {
     throw new Error("Error occurred with API");
   }
   const data = await response.json();
-  console.log(data.colors);
+  console.log("API data:  ",data.colors);
   return getColorsInfo(data.colors);
 }
 
