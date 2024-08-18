@@ -10,6 +10,7 @@ import {
   Await,
   useLoaderData,
   LoaderFunctionArgs,
+  useNavigation,
 } from "react-router-dom";
 
 import { Suspense } from "react";
@@ -27,8 +28,24 @@ export function loader({ request }: LoaderFunctionArgs) {
 
 export default function HomePage() {
   console.log("In component");
-
   const data = useLoaderData() as LoaderData;
+  const navigation = useNavigation();
+
+  const isReloading =
+    navigation.state === "loading" &&
+    navigation.formData != null &&
+    navigation.formAction ===
+      navigation.location.pathname + navigation.location.search;
+
+  const isRedirecting =
+    navigation.state === "loading" &&
+    navigation.formData != null &&
+    navigation.formAction !==
+      navigation.location.pathname + navigation.location.search;
+
+  console.log("isReloading: ", isReloading);
+  console.log("isRedirecting: ", isRedirecting);
+
   function renderPallet(colorsInfo: Color[]) {
     console.log("promise resolved, Values recieved: ", colorsInfo);
     return <Pallet colorsInfo={colorsInfo} />;
@@ -37,9 +54,12 @@ export default function HomePage() {
   return (
     <main>
       <InputForm />
-      <Suspense fallback={<h1>Loading....</h1>}>
-        <Await resolve={data.colorsInfo}>{renderPallet}</Await>
-      </Suspense>
+      { isReloading || isRedirecting ?
+        <h1>Loading....</h1> :
+        <Suspense fallback={<h1>Loading....</h1>}>
+          <Await resolve={data.colorsInfo}>{renderPallet}</Await>
+        </Suspense>
+      }
     </main>
   );
 }

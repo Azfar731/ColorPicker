@@ -8,7 +8,7 @@ export default function InputForm() {
 
   return (
     <div  className="form-container">
-      <Form  replace className="form">
+      <Form  replace  className="form">
         <input
           type="color"
           name="color"
