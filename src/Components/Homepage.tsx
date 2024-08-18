@@ -13,6 +13,7 @@ import {
   redirect,
   LoaderFunctionArgs,
   ActionFunctionArgs,
+  useNavigation
 } from "react-router-dom";
 
 import { Suspense } from "react";
@@ -35,6 +36,9 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function HomePage() {
   const { colorsInfo } = useLoaderData() as LoaderData;
+
+  const navigation = useNavigation()
+  console.log("useless")
 
   function renderPallet(colorsInfo: Color[]) {
     return <Pallet colorsInfo={colorsInfo} />;
