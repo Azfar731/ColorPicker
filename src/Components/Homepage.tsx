@@ -14,10 +14,11 @@ import {
 } from "react-router-dom";
 
 import { Suspense } from "react";
+import { Mosaic } from "react-loading-indicators";
+import PlaceHolder from "./Placeholder";
 import "./HomePage.css";
 
 export function loader({ request }: LoaderFunctionArgs) {
-  console.log("in loader");
   const params = new URL(request.url).searchParams;
   const { color, mode, count } = getSearchParams(params); //utility function to get search parameters
   const baseUrl = "https://www.thecolorapi.com/scheme";
@@ -27,7 +28,6 @@ export function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function HomePage() {
-  console.log("In component");
   const data = useLoaderData() as LoaderData;
   const navigation = useNavigation();
 
@@ -43,23 +43,32 @@ export default function HomePage() {
     navigation.formAction !==
       navigation.location.pathname + navigation.location.search;
 
-  console.log("isReloading: ", isReloading);
-  console.log("isRedirecting: ", isRedirecting);
-
   function renderPallet(colorsInfo: Color[]) {
-    console.log("promise resolved, Values recieved: ", colorsInfo);
     return <Pallet colorsInfo={colorsInfo} />;
   }
 
   return (
     <main>
       <InputForm />
-      { isReloading || isRedirecting ?
-        <h1>Loading....</h1> :
-        <Suspense fallback={<h1>Loading....</h1>}>
+      {isReloading || isRedirecting ? (
+        <PlaceHolder>
+          <Mosaic
+            color={["#b956a9", "#d7b54a", "#efff00"]}
+            size="large"
+          />
+        </PlaceHolder>
+      ) : (
+        <Suspense
+          fallback={
+            <Mosaic
+              color={["#9d00ff", "#b956a9", "#d7b54a", "#efff00"]}
+              size="large"
+            />
+          }
+        >
           <Await resolve={data.colorsInfo}>{renderPallet}</Await>
         </Suspense>
-      }
+      )}
     </main>
   );
 }

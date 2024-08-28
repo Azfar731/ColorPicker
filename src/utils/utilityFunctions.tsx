@@ -33,7 +33,7 @@ export async function fetchDataFromColorAPI(targetUrl: string) {
     throw new Error("Error occurred with API");
   }
   const data = await response.json();
-  console.log("API data:  ",data.colors);
+  
   return getColorsInfo(data.colors);
 }
 
