@@ -2,7 +2,6 @@ import Pallet from "./Pallet";
 import InputForm from "./InputForm";
 import {
   getSearchParams,
-  getFormData,
   fetchDataFromColorAPI,
 } from "../utils/utilityFunctions";
 import { Color, LoaderData } from "../utils/customTypes";
@@ -10,35 +9,39 @@ import {
   defer,
   Await,
   useLoaderData,
-  redirect,
   LoaderFunctionArgs,
-  ActionFunctionArgs,
-  useNavigation
+  useNavigation,
 } from "react-router-dom";
 
 import { Suspense } from "react";
+import { Mosaic } from "react-loading-indicators";
+import PlaceHolder from "./Placeholder";
 import "./HomePage.css";
 
 export function loader({ request }: LoaderFunctionArgs) {
   const params = new URL(request.url).searchParams;
-  const { color, mode, count } = getSearchParams(params);
-
+  const { color, mode, count } = getSearchParams(params); //utility function to get search parameters
   const baseUrl = "https://www.thecolorapi.com/scheme";
   const searchQuery = `?hex=${color}&mode=${mode}&count=${count}&format=json`;
 
   return defer({ colorsInfo: fetchDataFromColorAPI(baseUrl + searchQuery) });
 }
 
-export async function action({ request }: ActionFunctionArgs) {
-  const { color, mode, count } = getFormData(await request.formData());
-  throw redirect(`/?color=${color}&mode=${mode}&count=${count}`);
-}
-
 export default function HomePage() {
-  const { colorsInfo } = useLoaderData() as LoaderData;
+  const data = useLoaderData() as LoaderData;
+  const navigation = useNavigation();
 
-  const navigation = useNavigation()
-  console.log("useless")
+  const isReloading =
+    navigation.state === "loading" &&
+    navigation.formData != null &&
+    navigation.formAction ===
+      navigation.location.pathname + navigation.location.search;
+
+  const isRedirecting =
+    navigation.state === "loading" &&
+    navigation.formData != null &&
+    navigation.formAction !==
+      navigation.location.pathname + navigation.location.search;
 
   function renderPallet(colorsInfo: Color[]) {
     return <Pallet colorsInfo={colorsInfo} />;
@@ -47,9 +50,25 @@ export default function HomePage() {
   return (
     <main>
       <InputForm />
-      <Suspense fallback={<h1>Loading....</h1>}>
-        <Await resolve={colorsInfo}>{renderPallet}</Await>
-      </Suspense>
+      {isReloading || isRedirecting ? (
+        <PlaceHolder>
+          <Mosaic
+            color={["#b956a9", "#d7b54a", "#efff00"]}
+            size="large"
+          />
+        </PlaceHolder>
+      ) : (
+        <Suspense
+          fallback={
+            <Mosaic
+              color={["#9d00ff", "#b956a9", "#d7b54a", "#efff00"]}
+              size="large"
+            />
+          }
+        >
+          <Await resolve={data.colorsInfo}>{renderPallet}</Await>
+        </Suspense>
+      )}
     </main>
   );
 }

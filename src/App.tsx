@@ -1,7 +1,4 @@
-import HomePage, {
-  loader as HomePageLoader,
-  action as HomePageAction,
-} from "./Components/Homepage";
+import HomePage, { loader as HomePageLoader } from "./Components/Homepage";
 import Navbar from "./Components/Navbar";
 import {
   Route,
@@ -10,6 +7,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import "./App.css";
+import ErrorElement from "./ErrorPage/ErrorElement";
 
 function App() {
   const browserRouter = createBrowserRouter(
@@ -18,7 +16,7 @@ function App() {
         path="/"
         element={<HomePage />}
         loader={HomePageLoader}
-        action={HomePageAction}
+        errorElement={<ErrorElement links={[]} className="error-outer-div"/>}
       />
     )
   );

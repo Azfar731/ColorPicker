@@ -7,8 +7,8 @@ export default function InputForm() {
   const { color, mode, count } = getSearchParams(searchParams);
 
   return (
-    <div className="form-container">
-      <Form replace method="post" className="form">
+    <div  className="form-container">
+      <Form  replace  className="form">
         <input
           type="color"
           name="color"

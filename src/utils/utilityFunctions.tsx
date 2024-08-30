@@ -1,11 +1,13 @@
 import { Color, ColorInput } from "./customTypes";
-
+import { json } from "react-router-dom";
 export function getSearchParams(searchParams: URLSearchParams) {
-  const color = searchParams.get("color") || "42bff5";
+  const unFormattedColorInput = searchParams.get("color") || "#42bff5";
   const mode = searchParams.get("mode") || "monochrome";
   const count = searchParams.get("count") || "5";
-
+  const color = unFormattedColorInput.slice(1)
   return { color, mode, count };
+  // return { color: unFormattedColorInput, mode, count };
+
 }
 
 export function getFormData(formData: FormData) {
@@ -29,11 +31,19 @@ export function getFormData(formData: FormData) {
 
 export async function fetchDataFromColorAPI(targetUrl: string) {
   const response = await fetch(targetUrl);
-  if (response.status !== 200) {
-    throw new Error("Error occurred with API");
+  // if (response.status !== 200) {
+  //   throw new Response("Error Occurred", {status: 404})
+  // }
+
+  if (true) {
+   throw {
+    msg: "this is the error msg",
+    status: response.status
+   }
   }
+
   const data = await response.json();
-  console.log(data.colors);
+  
   return getColorsInfo(data.colors);
 }
 
