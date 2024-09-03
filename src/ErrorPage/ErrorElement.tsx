@@ -1,28 +1,69 @@
 import "./ErrorElement.css";
 import {
-  json,
   useRouteError,
   Link,
   isRouteErrorResponse,
 } from "react-router-dom";
 
-export default function ErrorElement({ links, ...rest }) {
-  const error = useRouteError();
+type ErrorType =  {msg: "string"; status: number | string; manual:boolean}
+
+export default function ErrorElement({ width= "100%", height= "100%", backgroundColor="white", links=[{path:"/",text:"Go to Homepage"}]}) {
+ 
+ 
+ 
+ 
+ 
+ 
+  const error: ErrorType | string = useRouteError() as ErrorType;
   console.log("Error:", error);
+
+  // function errorMessage(error: unknown): string {
+  //   if (isRouteErrorResponse(error) ) {
+  //     return `${error.status} ${error.statusText}`
+  //   } else if (error instanceof Error) {
+  //     return error.message
+  //   } else if (typeof error === 'string') {
+  //     return error
+  //   } else {
+  //     console.error(error)
+  //     return 'Unknown error'
+  //   }
+  // }
+
+
 
   if (isRouteErrorResponse(error)) {
     console.log("isRouteErrorResponse is true");
   }
+
+  let msg,status
+
+  if(error.manual){
+   ( {msg,status} = error)
+
+  }else{
+    msg = "Internal Server Error"
+    status = 500
+  }
+
+  
+  const buttonArray = links.map((link)=>{
+    return <Link to={link.path} className="error-btn">{link.text}</Link>
+  });
+
+  console.log(buttonArray)
+
+
   return (
-    <div {...rest}>
+    <div style={{width, height, backgroundColor}}>
       <div className="error-container">
         <div className="xl-font">Oops!</div>
 
-        <h2 className="error-heading">404 - Page not found</h2>
+        <h2 className="error-heading">{status} - {msg}</h2>
         
-        <p className="error-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur totam ipsam aliquam doloribus obcaecati </p>
+        <p className="error-body">You can try reloading the page or go back to HomePage</p>
 
-        <Link to="/" className="error-btn">Go to Homepage</Link>
+        {buttonArray}
       </div>
     </div>
   );

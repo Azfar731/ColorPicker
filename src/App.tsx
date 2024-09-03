@@ -16,7 +16,7 @@ function App() {
         path="/"
         element={<HomePage />}
         loader={HomePageLoader}
-        errorElement={<ErrorElement links={[]} className="error-outer-div"/>}
+        errorElement={<ErrorElement  width="100%" height="90vh" backgroundColor="whitesmoke"/>}
       />
     )
   );

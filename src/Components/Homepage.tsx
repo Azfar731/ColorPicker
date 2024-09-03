@@ -23,6 +23,7 @@ export function loader({ request }: LoaderFunctionArgs) {
   const { color, mode, count } = getSearchParams(params); //utility function to get search parameters
   const baseUrl = "https://www.thecolorapi.com/scheme";
   const searchQuery = `?hex=${color}&mode=${mode}&count=${count}&format=json`;
+  // const searchQuery = `?he=${color.slice(3)}&mode=${mode}&count=${count}&format=json`;
 
   return defer({ colorsInfo: fetchDataFromColorAPI(baseUrl + searchQuery) });
 }

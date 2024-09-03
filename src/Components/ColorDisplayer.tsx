@@ -1,12 +1,12 @@
 import "./ColorDisplayer.css";
-
+import { CSSProperties } from "react";
 type Params = {
   colorInfo: { hex: string; name: string };
   width: number;
 };
 
 export default function ColorDisplayer({ colorInfo, width }: Params) {
-  const styles = {
+  const styles: CSSProperties = {
     width: `${width}%`,
     height: "100%",
     minWidth: "10%",
@@ -39,7 +39,7 @@ export default function ColorDisplayer({ colorInfo, width }: Params) {
     <div style={styles} onClick={handelClick}>
       <div className="color-info" style={fontSize}>
         <div className="color-code">{colorInfo.hex}</div>
-        <div className="color-name">{colorInfo.name}</div>
+        <div style={{}} className="color-name">{colorInfo.name}</div>
       </div>
       <div
         id={`value-copied-prompt-${colorInfo.hex}`}

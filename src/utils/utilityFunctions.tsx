@@ -1,5 +1,5 @@
 import { Color, ColorInput } from "./customTypes";
-import { json } from "react-router-dom";
+
 export function getSearchParams(searchParams: URLSearchParams) {
   const unFormattedColorInput = searchParams.get("color") || "#42bff5";
   const mode = searchParams.get("mode") || "monochrome";
@@ -31,19 +31,29 @@ export function getFormData(formData: FormData) {
 
 export async function fetchDataFromColorAPI(targetUrl: string) {
   const response = await fetch(targetUrl);
-  // if (response.status !== 200) {
-  //   throw new Response("Error Occurred", {status: 404})
-  // }
-
-  if (true) {
-   throw {
-    msg: "this is the error msg",
-    status: response.status
-   }
+  
+  
+  if (!response.ok) {
+    throw {
+      msg: "Failed to Fetch Response",
+      status: response.status,
+      manual: true
+    }
+  }
+  
+ 
+  
+  const data = await response.json();
+  console.log("API DAta: ", data)
+  
+  if (data.code === 400) {
+    throw {
+      msg: "API RETURNED AN ERROR ",
+      status: data.code,
+      manual: true
+    }
   }
 
-  const data = await response.json();
-  
   return getColorsInfo(data.colors);
 }
 
