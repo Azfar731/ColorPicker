@@ -1,14 +1,46 @@
+import { useState } from "react";
 import { Form, useSearchParams } from "react-router-dom";
 import { getSearchParams } from "../utils/utilityFunctions.tsx";
+import Select from "react-select";
 import "./InputForm.css";
+
+
 
 export default function InputForm() {
   const [searchParams] = useSearchParams();
   const { color, mode, count } = getSearchParams(searchParams);
+  
+  const options  = [
+    { value: "monochrome", label: "Monochrome" },
+    { value: "monochrome-dark", label: "Monochrome Dark" },
+    { value: "monochrome-light", label: "Monochrome Light" },
+    { value: "analogic", label: "Analogic" },
+    { value: "complement", label: "Complement" },
+    { value: "analogic-complement", label: "Analogic Complement" },
+    { value: "triad", label: "Triad" },
+    { value: "quad", label: "Quad" },
+  ];
 
+  const selectedOption = options.find(element => element.value === mode)
+
+  const selectStyle = {
+    control: (prev)=>{
+      return {
+        ...prev,
+        width: "200px",
+      }
+    },
+    option: (prev,state)=>{
+      return {
+        ...prev,
+        color: state.isSelected ? "black" : "slategray",
+        backgroundColor: state.isSelected ? "lightgray" : "white" 
+      }
+    }
+  }
   return (
-    <div  className="form-container">
-      <Form  replace  className="form">
+    <div className="form-container">
+      <Form replace className="form">
         <input
           type="color"
           name="color"
@@ -18,7 +50,15 @@ export default function InputForm() {
         />
         <div className="inputContainer">
           <label htmlFor="mode">Mode</label>
-          <select name="mode" id="mode" defaultValue={mode} className="border">
+          <Select
+            // className="border"
+            defaultValue={selectedOption}
+            options={options}
+            styles={selectStyle}
+            name="mode"
+            id="mode"
+          />
+          {/* <select name="mode" id="mode" defaultValue={mode} className="border">
             <option value="monochrome">Monochrome</option>
             <option value="monochrome-dark">Monochrome Dark</option>
             <option value="monochrome-light">Monochrome Light</option>
@@ -27,7 +67,7 @@ export default function InputForm() {
             <option value="analogic-complement">Analogic Complement</option>
             <option value="triad">Triad</option>
             <option value="quad">Quad</option>
-          </select>
+          </select> */}
         </div>
         <div className="inputContainer">
           <label htmlFor="count">Count</label>
