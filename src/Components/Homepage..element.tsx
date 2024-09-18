@@ -1,11 +1,7 @@
 import Pallet from "./Pallet";
 import InputForm from "./InputForm";
 import { Color, LoaderData } from "../utils/customTypes";
-import {
-  Await,
-  useLoaderData,
-  useNavigation,
-} from "react-router-dom";
+import { Await, useLoaderData, useNavigation } from "react-router-dom";
 
 import { Suspense } from "react";
 import { Mosaic } from "react-loading-indicators";
@@ -37,18 +33,17 @@ export default function HomePage() {
       <InputForm />
       {isReloading || isRedirecting ? (
         <PlaceHolder>
-          <Mosaic
-            color={["#b956a9", "#d7b54a", "#efff00"]}
-            size="large"
-          />
+          <Mosaic color={["#b956a9", "#d7b54a", "#efff00"]} size="large" />
         </PlaceHolder>
       ) : (
         <Suspense
           fallback={
-            <Mosaic
-              color={["#9d00ff", "#b956a9", "#d7b54a", "#efff00"]}
-              size="large"
-            />
+            <PlaceHolder>
+              <Mosaic
+                color={["#9d00ff", "#b956a9", "#d7b54a", "#efff00"]}
+                size="large"
+              />
+            </PlaceHolder>
           }
         >
           <Await resolve={data.colorsInfo}>{renderPallet}</Await>

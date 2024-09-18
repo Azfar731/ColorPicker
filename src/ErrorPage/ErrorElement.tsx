@@ -9,28 +9,8 @@ type ErrorType =  {msg: "string"; status: number | string; manual:boolean}
 
 export default function ErrorElement({ width= "100%", height= "100%", backgroundColor="white", links=[{path:"/",text:"Go to Homepage"}]}) {
  
- 
- 
- 
- 
- 
   const error: ErrorType | string = useRouteError() as ErrorType;
   console.log("Error:", error);
-
-  // function errorMessage(error: unknown): string {
-  //   if (isRouteErrorResponse(error) ) {
-  //     return `${error.status} ${error.statusText}`
-  //   } else if (error instanceof Error) {
-  //     return error.message
-  //   } else if (typeof error === 'string') {
-  //     return error
-  //   } else {
-  //     console.error(error)
-  //     return 'Unknown error'
-  //   }
-  // }
-
-
 
   if (isRouteErrorResponse(error)) {
     console.log("isRouteErrorResponse is true");

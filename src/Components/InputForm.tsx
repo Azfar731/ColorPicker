@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Form, useSearchParams } from "react-router-dom";
 import { getSearchParams } from "../utils/utilityFunctions.tsx";
 import Select from "react-select";
@@ -23,14 +22,15 @@ export default function InputForm() {
 
   const selectedOption = options.find(element => element.value === mode)
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const selectStyle = {
-    control: (prev)=>{
+    control: (prev: any)=>{
       return {
         ...prev,
         width: "200px",
       }
     },
-    option: (prev,state)=>{
+    option: (prev: any,state: any)=>{
       return {
         ...prev,
         color: state.isSelected ? "black" : "slategray",
@@ -38,6 +38,7 @@ export default function InputForm() {
       }
     }
   }
+  /* eslint-enable @typescript-eslint/no-explicit-any */
   return (
     <div className="form-container">
       <Form replace className="form">
