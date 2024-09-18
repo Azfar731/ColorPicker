@@ -1,15 +1,9 @@
 import Pallet from "./Pallet";
 import InputForm from "./InputForm";
-import {
-  getSearchParams,
-  fetchDataFromColorAPI,
-} from "../utils/utilityFunctions";
 import { Color, LoaderData } from "../utils/customTypes";
 import {
-  defer,
   Await,
   useLoaderData,
-  LoaderFunctionArgs,
   useNavigation,
 } from "react-router-dom";
 
@@ -17,16 +11,6 @@ import { Suspense } from "react";
 import { Mosaic } from "react-loading-indicators";
 import PlaceHolder from "./Placeholder";
 import "./HomePage.css";
-
-export function loader({ request }: LoaderFunctionArgs) {
-  const params = new URL(request.url).searchParams;
-  const { color, mode, count } = getSearchParams(params); //utility function to get search parameters
-  const baseUrl = "https://www.thecolorapi.com/scheme";
-  const searchQuery = `?hex=${color}&mode=${mode}&count=${count}&format=json`;
-  // const searchQuery = `?he=${color.slice(3)}&mode=${mode}&count=${count}&format=json`;
-
-  return defer({ colorsInfo: fetchDataFromColorAPI(baseUrl + searchQuery) });
-}
 
 export default function HomePage() {
   const data = useLoaderData() as LoaderData;

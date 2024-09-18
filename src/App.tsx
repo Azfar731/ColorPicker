@@ -1,4 +1,5 @@
-import HomePage, { loader as HomePageLoader } from "./Components/Homepage";
+import HomePage  from "./Components/Homepage..element";
+import { loader as HomePageLoader } from "./Components/Homepage.loader";
 import Navbar from "./Components/Navbar";
 import {
   Route,
