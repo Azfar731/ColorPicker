@@ -44,6 +44,11 @@ input[type=number]{
    text-align: center;
 }
 
+input:focus{
+    border: 2px solid #2684ff;
+    outline: none;
+}
+
 /* To remove the increment and decrement buttons */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
