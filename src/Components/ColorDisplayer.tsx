@@ -13,6 +13,7 @@ export default function ColorDisplayer({ colorInfo, width }: Params) {
     backgroundColor: colorInfo.hex,
     position: "relative",
     overflow: "hidden",
+    cursor: "pointer"
   };
 
   const fontSize = {

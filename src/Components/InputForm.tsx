@@ -3,13 +3,11 @@ import { getSearchParams } from "../utils/utilityFunctions.tsx";
 import Select from "react-select";
 import "./InputForm.css";
 
-
-
 export default function InputForm() {
   const [searchParams] = useSearchParams();
   const { color, mode, count } = getSearchParams(searchParams);
-  
-  const options  = [
+
+  const options = [
     { value: "monochrome", label: "Monochrome" },
     { value: "monochrome-dark", label: "Monochrome Dark" },
     { value: "monochrome-light", label: "Monochrome Light" },
@@ -20,24 +18,25 @@ export default function InputForm() {
     { value: "quad", label: "Quad" },
   ];
 
-  const selectedOption = options.find(element => element.value === mode)
+  const selectedOption = options.find((element) => element.value === mode);
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const selectStyle = {
-    control: (prev: any)=>{
+    control: (prev: any) => {
       return {
         ...prev,
         width: "200px",
-      }
+        cursor: "pointer",
+      };
     },
-    option: (prev: any,state: any)=>{
+    option: (prev: any, state: any) => {
       return {
         ...prev,
         color: state.isSelected ? "black" : "slategray",
-        backgroundColor: state.isSelected ? "lightgray" : "white" 
-      }
-    }
-  }
+        backgroundColor: state.isSelected ? "lightgray" : "white",
+      };
+    },
+  };
   /* eslint-enable @typescript-eslint/no-explicit-any */
   return (
     <div className="form-container">
